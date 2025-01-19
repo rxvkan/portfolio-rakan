@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,11 +91,17 @@
         }
 
         @keyframes glow {
-            0% { text-shadow: 0 0 10px #ffffff, 0 0 20px #d0d0d0; }
-            100% { text-shadow: 0 0 20px #d0d0d0, 0 0 30px #ffffff; }
+            0% {
+                text-shadow: 0 0 10px #ffffff, 0 0 20px #d0d0d0;
+            }
+
+            100% {
+                text-shadow: 0 0 20px #d0d0d0, 0 0 30px #ffffff;
+            }
         }
 
-        .discord-text, .animation {
+        .discord-text,
+        .animation {
             font-size: 2rem;
             white-space: pre;
             overflow: hidden;
@@ -114,7 +121,9 @@
         }
 
         @keyframes blink {
-            50% { border-color: transparent; }
+            50% {
+                border-color: transparent;
+            }
         }
 
         .portfolio {
@@ -189,6 +198,7 @@
             width: 23px;
             height: 23px;
         }
+
         .discord {
             cursor: pointer;
             width: 30px;
@@ -226,16 +236,16 @@
             margin-left: -135px;
         }
 
-        .circle-name:hover + .description-box {
+        .circle-name:hover+.description-box {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .circle-name:hover + .description-box.fade-in {
+        .circle-name:hover+.description-box.fade-in {
             animation: fadeIn 0.5s forwards;
         }
 
-        .circle-name:hover + .description-box.fade-out {
+        .circle-name:hover+.description-box.fade-out {
             animation: fadeOut 0.5s forwards;
         }
 
@@ -244,6 +254,7 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -255,6 +266,7 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+
             to {
                 opacity: 0;
                 transform: translateY(-10px);
@@ -318,7 +330,7 @@
             opacity: 1;
         }
 
-        #javascriptBox{
+        #javascriptBox {
             margin-left: -135vh;
             position: absolute;
             width: 25%;
@@ -334,22 +346,28 @@
             transition: opacity 1s ease-in-out, transform 0.3s ease;
             z-index: 2;
         }
-        #javascriptBox.visible{
+
+        #javascriptBox.visible {
             opacity: 1;
         }
-        #htmlBox.visible{
+
+        #htmlBox.visible {
             opacity: 1;
         }
-        #cssBox.visible{
+
+        #cssBox.visible {
             opacity: 1;
         }
-        #sqlBox.visible{
+
+        #sqlBox.visible {
             opacity: 1;
         }
-        #luauBox.visible{
+
+        #luauBox.visible {
             opacity: 1;
         }
-        .boxes{
+
+        .boxes {
             margin-top: 5vh;
             margin-left: -135vh;
             position: absolute;
@@ -366,18 +384,22 @@
             transition: opacity 1s ease-in-out, transform 0.3s ease;
             z-index: 2;
         }
+
         .boxes p {
             text-align: center;
         }
-        #aboutMeBox{
+
+        #aboutMeBox {
             margin-right: -270vh;
         }
-        #contactMeBox{
+
+        #contactMeBox {
             margin-right: -270vh;
             margin-top: 38vh;
         }
     </style>
 </head>
+
 <body>
     <video class="background-video" id="bgVideo" src="img/background5.mp4" loop autoplay muted></video>
     <div class="intro" onclick="startAnimation()">
@@ -389,8 +411,9 @@
             <div class="container">
                 <div class="circle-container">
                     <div class="circle"><img src="img/rakan.gif" alt="Rakan"></div>
-                    <div class="circle-name" onmouseover="showDescription(this)" onmouseout="hideDescription(this)">rakan</div>
-                    <div class="description-box">Web & Game developer. 16</div>
+                    <div class="circle-name" onmouseover="showDescription(this)" onmouseout="hideDescription(this)">
+                        rakan</div>
+                    <div class="description-box">Menor pecinha da leste</div>
                     <div class="badge-container">
                         <img class="badge" src="img/nitro.png" alt="Nitro">
                         <img class="badge" src="img/boost.png" alt="Boost">
@@ -399,7 +422,8 @@
                     </div>
                 </div>
             </div>
-            <div class="discord-text" id="discordText" onclick="window.location.href='https://discord.gg/leste';">discord.gg/leste</div>
+            <div class="discord-text" id="discordText" onclick="window.location.href='https://discord.gg/leste';">
+                discord.gg/leste</div>
 
             <div class="button-container">
                 <button class="action-button" onclick="showKnowledge()">Knowledge</button>
@@ -407,24 +431,26 @@
             </div>
         </div>
         <div id="javascriptBox" class="boxes">
-                <h2>JAVASCRIPT</h2>
-                <p>JavaScript é uma linguagem de programação usada para criar interatividade em páginas web.</p>
+            <h2>JAVASCRIPT</h2>
+            <p>JavaScript é uma linguagem de programação usada para criar interatividade em páginas web.</p>
         </div>
         <div id="htmlBox" class="boxes">
-                <h2>HTML</h2>
-                <p>HTML (HyperText Markup Language) é a linguagem padrão para criar e estruturar páginas web.</p>
+            <h2>HTML</h2>
+            <p>HTML (HyperText Markup Language) é a linguagem padrão para criar e estruturar páginas web.</p>
         </div>
         <div id="cssBox" class="boxes">
-                <h2>CSS</h2>
-                <p>CSS (Cascading Style Sheets) é uma linguagem usada para definir o estilo de uma página web.</p>
+            <h2>CSS</h2>
+            <p>CSS (Cascading Style Sheets) é uma linguagem usada para definir o estilo de uma página web.</p>
         </div>
         <div id="sqlBox" class="boxes">
-                <h2>SQL</h2>
-                <p>SQL (Structured Query Language) é uma linguagem de programação para gerenciar banco de dados relacionais.</p>
+            <h2>SQL</h2>
+            <p>SQL (Structured Query Language) é uma linguagem de programação para gerenciar banco de dados relacionais.
+            </p>
         </div>
         <div id="luauBox" class="boxes">
-                <h2>LUAU</h2>
-                <p>Luau é uma linguagem de programação baseada em Lua, usada principalmente para o desenvolvimento no Roblox.</p>
+            <h2>LUAU</h2>
+            <p>Luau é uma linguagem de programação baseada em Lua, usada principalmente para o desenvolvimento no
+                Roblox.</p>
         </div>
     </div>
 
@@ -435,11 +461,11 @@
         const textAnimation = document.getElementById('textAnimation');
         const discordText = document.getElementById('discordText');
         const animationText = ['r', 'ra', 'rak', 'raka', 'rakan', 'rakand', 'rakande', 'rakandev', 'rakandev.', 'rakandev.x', 'rakandev.xy', 'rakandev.xyz'];
-            var luau1 = document.getElementById('luauBox');
-            var sql1 = document.getElementById('sqlBox');
-            var html1 = document.getElementById('htmlBox');
-            var javascript1 = document.getElementById('javascriptBox');
-            var css1 = document.getElementById('cssBox');
+        var luau1 = document.getElementById('luauBox');
+        var sql1 = document.getElementById('sqlBox');
+        var html1 = document.getElementById('htmlBox');
+        var javascript1 = document.getElementById('javascriptBox');
+        var css1 = document.getElementById('cssBox');
 
         bgVideo.volume = 0.1;
 
@@ -518,7 +544,7 @@
 
             const knowledgeBox = document.createElement('div');
             knowledgeBox.classList.add('new-blur-box');
-            knowledgeBox.id = 'knowledgeBox'; 
+            knowledgeBox.id = 'knowledgeBox';
             knowledgeBox.innerHTML = `
                 <h2 id="knowledge1">Knowledge</h2>
                 <div class="icon-container">
@@ -578,21 +604,22 @@
             const aboutMeBox = document.createElement('div');
             aboutMeBox.classList.add('new-blur-box');
             aboutMeBox.id = 'aboutMeBox';
-            aboutMeBox.innerHTML = 
+            aboutMeBox.innerHTML =
                 '<h2>About Me </h2> <br> <p>Game & Web developer. 16</p>';
             document.body.appendChild(aboutMeBox);
             setTimeout(() => aboutMeBox.classList.add('visible'), 10);
         }
         function showContactMe() {
 
-const contactMeBox = document.createElement('div');
-contactMeBox.classList.add('new-blur-box');
-contactMeBox.id = 'contactMeBox';
-contactMeBox.innerHTML = 
-    '<h2>Contact</h2> <br> <img class="discord" src="img/discord.png" alt="Discord"> <br> <p>euamoakakal</p>';
-document.body.appendChild(contactMeBox);
-setTimeout(() => contactMeBox.classList.add('visible'), 10);
-}
+            const contactMeBox = document.createElement('div');
+            contactMeBox.classList.add('new-blur-box');
+            contactMeBox.id = 'contactMeBox';
+            contactMeBox.innerHTML =
+                '<h2>Contact</h2> <br> <img class="discord" src="img/discord.png" alt="Discord"> <br> <p>euamoakakal</p>';
+            document.body.appendChild(contactMeBox);
+            setTimeout(() => contactMeBox.classList.add('visible'), 10);
+        }
     </script>
 </body>
+
 </html>
