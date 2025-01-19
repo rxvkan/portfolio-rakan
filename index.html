@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="animatedTitle">@</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0f0f0f;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: -1;
+        }
+
+        .background-video.visible {
+            opacity: 1;
+        }
+
+        .blur-box {
+            position: absolute;
+            width: 30%;
+            height: 70%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 0.3s ease;
+            transform-origin: center;
+            z-index: 1;
+        }
+
+        .blur-box.visible {
+            opacity: 1;
+        }
+
+        .blur-box:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .intro {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background: #0f0f0f;
+            z-index: 10;
+            transition: opacity 1s ease;
+        }
+
+        .intro.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-text {
+            font-size: 2rem;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ffffff, 0 0 20px #d0d0d0;
+            animation: glow 1.5s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px #ffffff, 0 0 20px #d0d0d0; }
+            100% { text-shadow: 0 0 20px #d0d0d0, 0 0 30px #ffffff; }
+        }
+
+        .discord-text, .animation {
+            font-size: 2rem;
+            white-space: pre;
+            overflow: hidden;
+            border-right: 2px solid;
+            animation: blink 0.5s step-end infinite;
+        }
+
+        .animation {
+            color: #ffffff;
+        }
+
+        .discord-text {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .portfolio {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .portfolio.visible {
+            opacity: 1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .circle-container {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+
+        .circle-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .circle {
+            cursor: pointer;
+            width: 150px;
+            height: 150px;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .circle-name {
+            font-size: 20px;
+            color: #fff;
+            margin-top: 10px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .badge {
+            cursor: pointer;
+            width: 23px;
+            height: 23px;
+        }
+        .discord {
+            cursor: pointer;
+            width: 30px;
+            height: 23px;
+        }
+
+        .settings-button {
+            display: none;
+        }
+
+        #animatedTitle {
+            overflow: hidden;
+            border-right: 2px solid;
+            white-space: nowrap;
+            width: 0;
+            animation: typing 2s steps(10) 1s 1 normal both, blink 0.5s step-end infinite;
+        }
+
+        .description-box {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease-in-out;
+            margin-top: -3vh;
+            margin-left: -135px;
+        }
+
+        .circle-name:hover + .description-box {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .circle-name:hover + .description-box.fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .circle-name:hover + .description-box.fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            cursor: pointer;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .action-button:hover {
+            background-color: #555;
+        }
+
+        .icon-container {
+            margin-top: 4vh;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+
+        .icon-container img {
+            border-radius: 25%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .new-blur-box {
+            margin-left: -135vh;
+            margin-top: -40vh;
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .new-blur-box.visible {
+            opacity: 1;
+        }
+
+        #javascriptBox{
+            margin-left: -135vh;
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 0.3s ease;
+            z-index: 2;
+        }
+        #javascriptBox.visible{
+            opacity: 1;
+        }
+        #htmlBox.visible{
+            opacity: 1;
+        }
+        #cssBox.visible{
+            opacity: 1;
+        }
+        #sqlBox.visible{
+            opacity: 1;
+        }
+        #luauBox.visible{
+            opacity: 1;
+        }
+        .boxes{
+            margin-top: 5vh;
+            margin-left: -135vh;
+            position: absolute;
+            width: 25%;
+            height: 25%;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 1s ease-in-out, transform 0.3s ease;
+            z-index: 2;
+        }
+        .boxes p {
+            text-align: center;
+        }
+        #aboutMeBox{
+            margin-right: -270vh;
+        }
+        #contactMeBox{
+            margin-right: -270vh;
+            margin-top: 38vh;
+        }
+    </style>
+</head>
+<body>
+    <video class="background-video" id="bgVideo" src="img/background.mp4" loop autoplay muted></video>
+    <div class="intro" onclick="startAnimation()">
+        <div class="intro-text">Clique aqui</div>
+    </div>
+    <div class="animation" id="textAnimation"></div>
+    <div class="portfolio" id="portfolio">
+        <div class="blur-box" id="blurBox">
+            <div class="container">
+                <div class="circle-container">
+                    <div class="circle"><img src="img/rakan.gif" alt="Rakan"></div>
+                    <div class="circle-name" onmouseover="showDescription(this)" onmouseout="hideDescription(this)">rakan</div>
+                    <div class="description-box">Web & Game developer. 16</div>
+                    <div class="badge-container">
+                        <img class="badge" src="img/nitro.png" alt="Nitro">
+                        <img class="badge" src="img/boost.png" alt="Boost">
+                        <img class="badge" src="img/dev.png" alt="Developer">
+                        <img class="badge" src="img/quest.png" alt="Quest">
+                    </div>
+                </div>
+            </div>
+            <div class="discord-text" id="discordText" onclick="window.location.href='https://discord.gg/leste';">discord.gg/leste</div>
+
+            <div class="button-container">
+                <button class="action-button" onclick="showKnowledge()">Knowledge</button>
+                <button class="action-button" onclick="showAboutMe(), showContactMe()">About Me</button>
+            </div>
+        </div>
+        <div id="javascriptBox" class="boxes">
+                <h2>JAVASCRIPT</h2>
+                <p>JavaScript é uma linguagem de programação usada para criar interatividade em páginas web.</p>
+        </div>
+        <div id="htmlBox" class="boxes">
+                <h2>HTML</h2>
+                <p>HTML (HyperText Markup Language) é a linguagem padrão para criar e estruturar páginas web.</p>
+        </div>
+        <div id="cssBox" class="boxes">
+                <h2>CSS</h2>
+                <p>CSS (Cascading Style Sheets) é uma linguagem usada para definir o estilo de uma página web.</p>
+        </div>
+        <div id="sqlBox" class="boxes">
+                <h2>SQL</h2>
+                <p>SQL (Structured Query Language) é uma linguagem de programação para gerenciar banco de dados relacionais.</p>
+        </div>
+        <div id="luauBox" class="boxes">
+                <h2>LUAU</h2>
+                <p>Luau é uma linguagem de programação baseada em Lua, usada principalmente para o desenvolvimento no Roblox.</p>
+        </div>
+    </div>
+
+    <script>
+        const bgVideo = document.getElementById('bgVideo');
+        const portfolio = document.getElementById('portfolio');
+        const blurBox = document.getElementById('blurBox');
+        const textAnimation = document.getElementById('textAnimation');
+        const discordText = document.getElementById('discordText');
+        const animationText = ['r', 'ra', 'rak', 'raka', 'rakan', 'rakand', 'rakande', 'rakandev', 'rakandev.', 'rakandev.x', 'rakandev.xy', 'rakandev.xyz'];
+            var luau1 = document.getElementById('luauBox');
+            var sql1 = document.getElementById('sqlBox');
+            var html1 = document.getElementById('htmlBox');
+            var javascript1 = document.getElementById('javascriptBox');
+            var css1 = document.getElementById('cssBox');
+
+        bgVideo.volume = 0.1;
+
+        function showDescription(element) {
+            const descriptionBox = element.nextElementSibling;
+            descriptionBox.classList.remove('fade-out');
+            descriptionBox.classList.add('fade-in');
+        }
+
+        function hideDescription(element) {
+            const descriptionBox = element.nextElementSibling;
+            descriptionBox.classList.remove('fade-in');
+            descriptionBox.classList.add('fade-out');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const titleElement = document.getElementById("animatedTitle");
+            const text = "Rakandev.xyz";
+            let index = 0;
+
+            function typeWriter() {
+                if (index < text.length) {
+                    titleElement.textContent = "@" + text.substring(0, index + 1);
+                    index++;
+                    setTimeout(typeWriter, 200);
+                } else {
+                    setTimeout(() => {
+                        eraseWriter();
+                    }, 2000);
+                }
+            }
+
+            function eraseWriter() {
+                if (index > 0) {
+                    titleElement.textContent = "@" + text.substring(0, index - 1);
+                    index--;
+                    setTimeout(eraseWriter, 100);
+                } else {
+                    setTimeout(() => {
+                        typeWriter();
+                    }, 1000);
+                }
+            }
+            typeWriter();
+        });
+
+        function startAnimation() {
+            document.querySelector('.intro').classList.add('hidden');
+            bgVideo.muted = false;
+            let index = 0;
+            let interval = setInterval(() => {
+                if (index < animationText.length) {
+                    textAnimation.textContent = animationText[index++];
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        let reverseInterval = setInterval(() => {
+                            if (textAnimation.textContent.length > 0) {
+                                textAnimation.textContent = textAnimation.textContent.slice(0, -1);
+                            } else {
+                                clearInterval(reverseInterval);
+                                textAnimation.style.display = 'none';
+                                discordText.textContent = 'discord.gg/leste';
+                                portfolio.classList.add('visible');
+                                blurBox.classList.add('visible');
+                                bgVideo.classList.add('visible');
+                                document.querySelectorAll('.circle-container').forEach(el => el.classList.add('visible'));
+                            }
+                        }, 100);
+                    }, 500);
+                }
+            }, 200);
+        }
+
+        function showKnowledge() {
+
+            const knowledgeBox = document.createElement('div');
+            knowledgeBox.classList.add('new-blur-box');
+            knowledgeBox.id = 'knowledgeBox'; 
+            knowledgeBox.innerHTML = `
+                <h2 id="knowledge1">Knowledge</h2>
+                <div class="icon-container">
+                    <img src="img/javascript.png" alt="JavaScript" onclick="showJS()">
+                    <img src="img/html.png" alt="HTML" onclick="showHTML()">
+                    <img src="img/css.png" alt="CSS" onclick="showCSS()">
+                    <img src="img/sql.png" alt="SQL" onclick="showSQL()">
+                    <img src="img/luau.png" alt="Luau" onclick="showLuau()">
+                </div>
+            `;
+            document.body.appendChild(knowledgeBox);
+            setTimeout(() => knowledgeBox.classList.add('visible'), 10);
+        }
+
+        function showLuau() {
+
+            sql1.classList.remove('visible');
+            css1.classList.remove('visible');
+            html1.classList.remove('visible');
+            javascript1.classList.remove('visible');
+            luau1.classList.add('visible');
+        }
+        function showSQL() {
+
+            luau1.classList.remove('visible');
+            css1.classList.remove('visible');
+            html1.classList.remove('visible');
+            javascript1.classList.remove('visible');
+            sql1.classList.add('visible');
+        }
+        function showHTML() {
+
+            luau1.classList.remove('visible');
+            css1.classList.remove('visible');
+            sql1.classList.remove('visible');
+            javascript1.classList.remove('visible');
+            html1.classList.add('visible');
+        }
+        function showCSS() {
+
+            sql1.classList.remove('visible');
+            luau1.classList.remove('visible');
+            html1.classList.remove('visible');
+            javascript1.classList.remove('visible');
+            css1.classList.add('visible');
+        }
+        function showJS() {
+
+            sql1.classList.remove('visible');
+            css1.classList.remove('visible');
+            html1.classList.remove('visible');
+            luau1.classList.remove('visible');
+            javascript1.classList.add('visible');
+        }
+        function showAboutMe() {
+
+            const aboutMeBox = document.createElement('div');
+            aboutMeBox.classList.add('new-blur-box');
+            aboutMeBox.id = 'aboutMeBox';
+            aboutMeBox.innerHTML = 
+                '<h2>About Me </h2> <br> <p>Game & Web developer. 16</p>';
+            document.body.appendChild(aboutMeBox);
+            setTimeout(() => aboutMeBox.classList.add('visible'), 10);
+        }
+        function showContactMe() {
+
+const contactMeBox = document.createElement('div');
+contactMeBox.classList.add('new-blur-box');
+contactMeBox.id = 'contactMeBox';
+contactMeBox.innerHTML = 
+    '<h2>Contact</h2> <br> <img class="discord" src="img/discord.png" alt="Discord"> <br> <p>euamoakakal</p>';
+document.body.appendChild(contactMeBox);
+setTimeout(() => contactMeBox.classList.add('visible'), 10);
+}
+    </script>
+</body>
+</html>
