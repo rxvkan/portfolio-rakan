@@ -349,41 +349,42 @@
         #javascriptBox.visible {
             opacity: 1;
         }
-
         #htmlBox.visible {
             opacity: 1;
         }
-
         #cssBox.visible {
             opacity: 1;
         }
-
         #sqlBox.visible {
             opacity: 1;
         }
-
         #luauBox.visible {
             opacity: 1;
         }
-
         .boxes {
-            margin-top: 5vh;
-            margin-left: -135vh;
-            position: absolute;
-            width: 25%;
-            height: 25%;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            transition: opacity 1s ease-in-out, transform 0.3s ease;
-            z-index: 2;
-        }
+    position: absolute;
+    top: 50%; 
+    left: 18%;
+    height: 22%;
+    width: 23%;
+    margin-left: -27vh;
+    margin-top: 5vh;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 1s ease-in-out, transform 0.3s ease;
+    z-index: 2;
+    padding: 10px 20px;
+}
 
+.boxes.visible {
+    opacity: 1;
+}
         .boxes p {
             text-align: center;
         }
@@ -415,7 +416,6 @@
     align-items: center;
     flex-direction: column;
     padding: 20px;
-    opacity: 0;
     transition: opacity 1s ease-in-out;
     z-index: 2;
 }
@@ -490,7 +490,7 @@
                 <div class="circle-container">
                     <div class="circle"><img src="img/rakan.gif" alt="Rakan"></div>
                     <div class="circle-name" onmouseover="showDescription(this)" onmouseout="hideDescription(this)">
-                        Rodrigo</div>
+                        rakan</div>
                     <div class="description-box">Menor pecinha de Dourados</div>
                     <div class="badge-container">
                         <img class="badge" src="img/nitro.png" alt="Nitro">
@@ -541,14 +541,14 @@
         const blurBox = document.getElementById('blurBox');
         const textAnimation = document.getElementById('textAnimation');
         const discordText = document.getElementById('discordText');
-        const animationText = ['r', 'ro', 'rod', 'rodr', 'rodri', 'rodrid', 'rodride', 'rodridev', 'rodridev.', 'rodridev.x', 'rodridev.xy', 'rodridev.xyz'];
+        const animationText = ['r', 'ra', 'rak', 'raka', 'rakan', 'rakand', 'rakande', 'rakandev', 'rakandev.', 'rakandev.x', 'rakandev.xy', 'rakandev.xyz'];
         var luau1 = document.getElementById('luauBox');
         var sql1 = document.getElementById('sqlBox');
         var html1 = document.getElementById('htmlBox');
         var javascript1 = document.getElementById('javascriptBox');
         var css1 = document.getElementById('cssBox');
 
-        bgVideo.volume = 0.1;
+        bgVideo.volume = 0.8;
 
         function showDescription(element) {
             const descriptionBox = element.nextElementSibling;
@@ -564,7 +564,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             const titleElement = document.getElementById("animatedTitle");
-            const text = "rodridev.xyz";
+            const text = "rakandev.xyz";
             let index = 0;
 
             function typeWriter() {
@@ -622,27 +622,25 @@
         }
 
         function showKnowledge() {
-
-            const knowledgeBox = document.createElement('div');
-            knowledgeBox.classList.add('new-blur-box');
-            knowledgeBox.id = 'knowledgeBox';
-            knowledgeBox.innerHTML = `
-                <h2 id="knowledge1">Knowledge</h2>
-                <div class="icon-container">
-                    <img src="img/javascript.png" alt="JavaScript" onclick="showJS()">
-                    <img src="img/html.png" alt="HTML" onclick="showHTML()">
-                    <img src="img/css.png" alt="CSS" onclick="showCSS()">
-                    <img src="img/sql.png" alt="SQL" onclick="showSQL()">
-                    <img src="img/luau.png" alt="Luau" onclick="showLuau()">
-                </div>
-            `;
-            document.body.appendChild(knowledgeBox);
-            setTimeout(() => knowledgeBox.classList.add('visible'), 10);
-        }
+    const knowledgeBox = document.createElement('div');
+    knowledgeBox.classList.add('new-blur-box');
+    knowledgeBox.id = 'knowledgeBox';
+    knowledgeBox.innerHTML = `
+        <h2 id="knowledge1">Knowledge</h2>
+        <div class="icon-container">
+            <img src="img/javascript.png" alt="JavaScript" onclick="showJS()">
+            <img src="img/html.png" alt="HTML" onclick="showHTML()">
+            <img src="img/css.png" alt="CSS" onclick="showCSS()">
+            <img src="img/sql.png" alt="SQL" onclick="showSQL()">
+            <img src="img/luau.png" alt="Luau" onclick="showLuau()">
+        </div>
+    `;
+    document.body.appendChild(knowledgeBox);
+    setTimeout(() => knowledgeBox.classList.add('visible'), 10);
+}
         function showProjects() {
-    // Verifica se a box de projetos já existe
     if (document.getElementById('projectsBox')) {
-        return; // Se já existir, não faz nada
+        return; 
     }
 
     const projectsBox = document.createElement('div');
@@ -667,46 +665,45 @@
     portfolio.classList.add('invisible');
 }
 
-        function showLuau() {
+function showJS() {
+    document.getElementById('javascriptBox').classList.add('visible');
+    document.getElementById('htmlBox').classList.remove('visible');
+    document.getElementById('cssBox').classList.remove('visible');
+    document.getElementById('sqlBox').classList.remove('visible');
+    document.getElementById('luauBox').classList.remove('visible');
+}
 
-            sql1.classList.remove('visible');
-            css1.classList.remove('visible');
-            html1.classList.remove('visible');
-            javascript1.classList.remove('visible');
-            luau1.classList.add('visible');
-        }
-        function showSQL() {
+function showHTML() {
+    document.getElementById('javascriptBox').classList.remove('visible');
+    document.getElementById('htmlBox').classList.add('visible');
+    document.getElementById('cssBox').classList.remove('visible');
+    document.getElementById('sqlBox').classList.remove('visible');
+    document.getElementById('luauBox').classList.remove('visible');
+}
 
-            luau1.classList.remove('visible');
-            css1.classList.remove('visible');
-            html1.classList.remove('visible');
-            javascript1.classList.remove('visible');
-            sql1.classList.add('visible');
-        }
-        function showHTML() {
+function showCSS() {
+    document.getElementById('javascriptBox').classList.remove('visible');
+    document.getElementById('htmlBox').classList.remove('visible');
+    document.getElementById('cssBox').classList.add('visible');
+    document.getElementById('sqlBox').classList.remove('visible');
+    document.getElementById('luauBox').classList.remove('visible');
+}
 
-            luau1.classList.remove('visible');
-            css1.classList.remove('visible');
-            sql1.classList.remove('visible');
-            javascript1.classList.remove('visible');
-            html1.classList.add('visible');
-        }
-        function showCSS() {
+function showSQL() {
+    document.getElementById('javascriptBox').classList.remove('visible');
+    document.getElementById('htmlBox').classList.remove('visible');
+    document.getElementById('cssBox').classList.remove('visible');
+    document.getElementById('sqlBox').classList.add('visible');
+    document.getElementById('luauBox').classList.remove('visible');
+}
 
-            sql1.classList.remove('visible');
-            luau1.classList.remove('visible');
-            html1.classList.remove('visible');
-            javascript1.classList.remove('visible');
-            css1.classList.add('visible');
-        }
-        function showJS() {
-
-            sql1.classList.remove('visible');
-            css1.classList.remove('visible');
-            html1.classList.remove('visible');
-            luau1.classList.remove('visible');
-            javascript1.classList.add('visible');
-        }
+function showLuau() {
+    document.getElementById('javascriptBox').classList.remove('visible');
+    document.getElementById('htmlBox').classList.remove('visible');
+    document.getElementById('cssBox').classList.remove('visible');
+    document.getElementById('sqlBox').classList.remove('visible');
+    document.getElementById('luauBox').classList.add('visible');
+}
         function showAboutMe() {
 
             const aboutMeBox = document.createElement('div');
@@ -723,7 +720,7 @@
             contactMeBox.classList.add('new-blur-box');
             contactMeBox.id = 'contactMeBox';
             contactMeBox.innerHTML =
-                '<h2>Contact</h2> <br> <img class="discord" src="img/discord.png" alt="Discord"> <br> <p>usuras</p>';
+                '<h2>Contact</h2> <br> <img class="discord" src="img/discord.png" alt="Discord"> <br> <p>gjuv</p>';
             document.body.appendChild(contactMeBox);
             setTimeout(() => contactMeBox.classList.add('visible'), 10);
         }
