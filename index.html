@@ -400,40 +400,56 @@
             margin-right: -270vh;
             margin-top: 38vh;
         }
-        #projectsBox{
-            width: 90%;
-            height: 120%;
-            margin-top: 240vh;
-            margin-left: 1vh;
-        }
-        #projectsBox h2{
-            margin-top: 25vh;
-        }
-        .invisible{
-            opacity: 1;
-        }
-        #funtah{
-            border-radius: 5vh;
-            height: 300px;
-            width: 300px;
-        }
-        .projectfuntah h1{
-            margin-left: 6vh;
-        }
-        .projectfuntah{
-            margin-bottom: 30vh;
-            margin-left: 12vh;
-        }
-        .projectfuntah h3{
-            width: 400px;
-        }
-        #github{
-            border-radius: 3vh;
-            margin-bottom: -17vh;
-            margin-left: -63vh;
-            height: 75px;
-            width: 75px;
-        }
+        #projectsBox {
+    width: 90%;
+    height: auto;
+    margin-top: 220vh;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 2;
+}
+
+#projectsBox.visible {
+    opacity: 1;
+}
+
+.projectfuntah {
+    text-align: center;
+    width: 100%;
+}
+
+.projectfuntah h1 {
+    margin-left: 0;
+}
+
+.projectfuntah h3 {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+}
+
+#github {
+    border-radius: 3vh;
+    margin-bottom: 20px;
+    height: 75px;
+    width: 75px;
+}
+#funtah{
+    height: 300px;
+    width: 300px;
+    border-radius: 5vh;
+}
     </style>
 </head>
 
@@ -449,7 +465,7 @@
                 <div class="circle-container">
                     <div class="circle"><img src="img/rakan.gif" alt="Rakan"></div>
                     <div class="circle-name" onmouseover="showDescription(this)" onmouseout="hideDescription(this)">
-                        rakan</div>
+                        Rodrigo</div>
                     <div class="description-box">Menor pecinha de Dourados</div>
                     <div class="badge-container">
                         <img class="badge" src="img/nitro.png" alt="Nitro">
@@ -459,8 +475,9 @@
                     </div>
                 </div>
             </div>
-            <div class="discord-text" id="discordText" onclick="window.location.href='https://github.com/rxvkan;">
-                Github</div>
+            <div class="discord-text" id="discordText" onclick="window.location.href='https://github.com/rxvkan';">
+                Github
+            </div>
 
             <div class="button-container">
                 <button class="action-button" onclick="showProjects()">My Projects</button>
@@ -499,14 +516,14 @@
         const blurBox = document.getElementById('blurBox');
         const textAnimation = document.getElementById('textAnimation');
         const discordText = document.getElementById('discordText');
-        const animationText = ['r', 'ra', 'rak', 'raka', 'rakan', 'rakand', 'rakande', 'rakandev', 'rakandev.', 'rakandev.x', 'rakandev.xy', 'rakandev.xyz'];
+        const animationText = ['r', 'ro', 'rod', 'rodr', 'rodri', 'rodrid', 'rodride', 'rodridev', 'rodridev.', 'rodridev.x', 'rodridev.xy', 'rodridev.xyz'];
         var luau1 = document.getElementById('luauBox');
         var sql1 = document.getElementById('sqlBox');
         var html1 = document.getElementById('htmlBox');
         var javascript1 = document.getElementById('javascriptBox');
         var css1 = document.getElementById('cssBox');
 
-        bgVideo.volume = 0.8;
+        bgVideo.volume = 0.1;
 
         function showDescription(element) {
             const descriptionBox = element.nextElementSibling;
@@ -522,7 +539,7 @@
 
         document.addEventListener("DOMContentLoaded", () => {
             const titleElement = document.getElementById("animatedTitle");
-            const text = "rakandev.xyz";
+            const text = "rodridev.xyz";
             let index = 0;
 
             function typeWriter() {
@@ -573,10 +590,10 @@
                                 bgVideo.classList.add('visible');
                                 document.querySelectorAll('.circle-container').forEach(el => el.classList.add('visible'));
                             }
-                        }, 120);
-                    }, 200);
+                        }, 100);
+                    }, 500);
                 }
-            }, 150);
+            }, 200);
         }
 
         function showKnowledge() {
@@ -598,28 +615,31 @@
             setTimeout(() => knowledgeBox.classList.add('visible'), 10);
         }
         function showProjects() {
+    // Verifica se a box de projetos já existe
+    if (document.getElementById('projectsBox')) {
+        return; // Se já existir, não faz nada
+    }
 
-            const projectsBox = document.createElement('div');
-            projectsBox.classList.add('new-blur-box');
-            projectsBox.id = 'projectsBox';
-            projectsBox.innerHTML = `
-                <h2>My Projects</h2>
-            <div class="projectfuntah">
-                <h1>Funtah AI</h1>
-                <img src="img/funtah.png" id="funtah">
-                <a href="https://github.com/rxvkan" target="_blank">
-                <img src="img/github.png" id="github" alt="GitHub">
-                </a>
-                <h3>Chat criado para interação com inteligência artificial.</h3>
-                <h3>© Copyright 2025 - rakan & Funtah Devs</h3>
-                <br>
-                <br>
-                <h3>Im making a roblox tag game, spoilers soon.</h3>
-            </div>
-`;
-document.body.appendChild(projectsBox);
-setTimeout(() => projectsBox.classList.add('visible'), 10);
-portfolio.classList.add('invisible')
+    const projectsBox = document.createElement('div');
+    projectsBox.classList.add('new-blur-box');
+    projectsBox.id = 'projectsBox';
+    projectsBox.innerHTML = `
+        <h2>My Projects</h2>
+        <div class="projectfuntah">
+            <h1>Funtah AI</h1>
+            <a href="https://github.com/rxvkan" target="_blank"></a>
+            <img src="img/funtah.png" id="funtah">
+            <h3>Chat criado para interação com inteligência artificial.</h3>
+            <h3>© Copyright 2025 - Rakan & Funtah Devs</h3>
+            <br>
+            <br>
+            <h3>Im making a roblox tag game, spoilers soon.</h3>
+        </div>
+        <img src="img/github.png" id="github" alt="GitHub">
+    `;
+    document.body.appendChild(projectsBox);
+    setTimeout(() => projectsBox.classList.add('visible'), 10);
+    portfolio.classList.add('invisible');
 }
 
         function showLuau() {
